@@ -2,6 +2,10 @@
 
 ### 个人信息
 
+姓名：韩沛涛
+
+学号：201812213502015
+
 You can use the [editor on GitHub](https://github.com/hanpptt/hanpptt.GitHub.io/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
 
 
