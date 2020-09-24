@@ -1,6 +1,6 @@
 ## 计算机图形学
 
-###个人信息
+### 个人信息
 
 You can use the [editor on GitHub](https://github.com/hanpptt/hanpptt.GitHub.io/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
 
