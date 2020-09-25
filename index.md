@@ -10,7 +10,7 @@
 
 ### 实验一
 
-+ [LAB-1](http://github.com/hanpptt/WEBGL/Lab-1/demos/chap-1-demo-1.html) 
++ [LAB-1](http://github.com/hanpptt/hanpptt.github.io/Lab-1/demos/chap-1-demo-1.html) 
 
 You can use the [editor on GitHub](https://github.com/hanpptt/hanpptt.GitHub.io/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
 
