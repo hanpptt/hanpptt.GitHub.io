@@ -58,7 +58,7 @@ window.onload = function init(){
     gl.enableVertexAttribArray( vPosition );
     
     var vPosition2 = gl2.getAttribLocation( program2, "vPosition" );
-	gl2.vertexAttribPointer( vPosition2, 2, gl.FLOAT, false, 0, 0 );
+	gl2.vertexAttribPointer( vPosition2, 2, gl2.FLOAT, false, 0, 0 );
 	gl2.enableVertexAttribArray( vPosition2 );
 
 	render();
