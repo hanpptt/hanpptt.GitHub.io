@@ -10,9 +10,30 @@
 
 ### 实验一
 
-+ [LAB-1](http://hanpptt.github.io/Lab-1/demos/chap1-demo-1.html) 
++ [STEP-1](http://hanpptt.github.io/Lab-1/demos/chap1-demo-1.html) 
 
-You can use the [editor on GitHub](https://github.com/hanpptt/hanpptt.GitHub.io/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+搭建环境，文件运行正常
+
++ [mission-A](http://hanpptt.github.io/Lab-1/demos/mission-A.html)
+
+改变三角形颜色
+
++ [mission-B](http://hanppt.github.io/Lab-1/demos/missio-B.html)
+
+绘制四边形，并设置颜色
+
++ [mission-C](http://hanpptt.github.io/Lab-1/demos/mission-C.html)
+
+同时绘制三角形、四边形，颜色相同
+
++ [mission-D](http://hanpptt.github.io/Lab-1/demos/mission-D.html)
+
+两个图形的颜色设置不同
+
++ [mission-E](http://hanpptt.github.io/Lab-1/demos/mission-E.html)
+
+三角形的颜色为渐变色
+
 
 
 
