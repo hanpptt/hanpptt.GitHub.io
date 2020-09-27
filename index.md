@@ -18,7 +18,7 @@
 
 改变三角形颜色
 
-+ [mission-B](http://hanpptt.github.io/Lab-1/demos/missio-B.html)
++ [mission-B](http://hanpptt.github.io/Lab-1/demos/mission-B.html)
 
 绘制四边形，并设置颜色
 
