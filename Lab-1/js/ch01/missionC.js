@@ -46,7 +46,7 @@ window.onload = function init(){
 
 	// Associate external shader variables with data buffer
 	var vPosition = gl.getAttribLocation( program, "vPosition" );
-	gl.vertexAttribPointer( vPosition, 3, gl.FLOAT, false, 0, 0 );
+	gl.vertexAttribPointer( vPosition, 6, gl.FLOAT, false, 0, 0 );
 	gl.enableVertexAttribArray( vPosition );
 
 	render();
