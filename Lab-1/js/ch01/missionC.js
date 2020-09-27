@@ -56,5 +56,5 @@ function render(){
 	gl.clear( gl.COLOR_BUFFER_BIT );//颜色缓冲；清空canvas绘图区域
 	//gl.drawArrays( gl.TRIANGLE_FAN, 0, 4 );
 	gl.drawArrays( gl.TRIANGLES, 0, 3 );//绘制三角形
-	gl.drawArrays( gl.TRIANGLE_FANS, 3, 7 );//绘制四边形
+	gl.drawArrays( gl.TRIANGLE_FANS, 4, 7 );//绘制四边形
 }
