@@ -10,7 +10,7 @@
 
 ### 实验0
 
-[Lab-0](http://hanpptt.github.io/Lab-1/demos/lab-0.html)
+[Lab-0](http://hanpptt.github.io/Lab-0/Lab-0.html)
 
 ### 实验一
 
