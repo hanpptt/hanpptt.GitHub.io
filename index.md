@@ -38,6 +38,10 @@
 
 三角形的颜色为渐变色
 
+### 实验二
+
++ [LAB-2](http://hanpptt.github.io/Lab-2/demos/Lab2-1.html)
+
 
 
 
