@@ -40,8 +40,11 @@
 
 ### 实验二
 
-+ [LAB-2](http://hanpptt.github.io/Lab-2/demos/Lab2-1.html)
++ [LAB-2](http://hanpptt.github.io/Lab-2/demos/index.html)
 
+### 实验三
+
++ [LAB-3](http://hanpptt.github.io/Lab-3/demos/index.html)
 
 
 
