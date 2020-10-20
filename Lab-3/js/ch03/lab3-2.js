@@ -96,7 +96,6 @@ function renderSquare(){
 	gl.uniform1f( thetaLoc, theta );
 
     gl.drawArrays( gl.TRIANGLE_FAN, 0, 64);
-
 	// update and render
 	setTimeout( function (){ requestAnimFrame( renderSquare ); }, delay );
 	//setTimeout() 方法用于在指定的毫秒数后调用函数或计算表达式。
