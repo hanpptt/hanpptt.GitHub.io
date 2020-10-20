@@ -13,12 +13,15 @@ var eyes=[
     -0.5,0.5,0,
     -0.15,0.5,0,
     0.15,0.5,0,
-    0.5,0.5,0,];
+    0.5,0.5,0];
 
-var baseColor = [
-    1.0, 0.95, 0.9,
-    0.0, 0.0 , 0.0
+var mon=[
+    -0.15,0.3,0,
+    0,-0.15,0,
+    0,-0.15,0,
+    0.15,0.3,0
 ];
+
 
 function reset(){
     location.reload();
@@ -49,7 +52,8 @@ function initRotSquare(){
 	// 	 0, -1,  0
 	// ];
 
-    var  vertices = calCircle(64,0.5);
+    var  vertices;
+    vertices = calCircle(64,1);
 
 
 	var bufferId = gl.createBuffer();
@@ -93,9 +97,13 @@ function renderSquare(){
 	else if( theta < -2 * Math.PI )
 		theta += ( 2 * Math.PI );
 
-	gl.uniform1f( thetaLoc, theta );
+    gl.uniform1f( thetaLoc, theta );
 
-    gl.drawArrays( gl.TRIANGLE_FAN, 0, 64);
+    gl.drawArrays( gl.LINE_LOOP, 8, 64);
+    gl.drawArrays( gl.LINES, 4, 7);
+    gl.drawArrays( gl.LINES, 0, 4);
+    //gl.drawArrays( gl.LINES, 64, 66);
+    //gl.drawArrays( gl.LINES, 67, 68);
 	// update and render
 	setTimeout( function (){ requestAnimFrame( renderSquare ); }, delay );
 	//setTimeout() 方法用于在指定的毫秒数后调用函数或计算表达式。
@@ -103,32 +111,27 @@ function renderSquare(){
 
 function calCircle(n,r){
      // 画n个点
-     var vertices = new Float32Array(n*3);
+     var vertices = new Float32Array(n*3+12+12);
      var angle = 0; // 开始的弧度 
      // var r = 0.7; // 圆的半径
      // θ值
      var stepAngle = 360/n * (Math.PI/180);
-     for(var i=0; i<n*3; i+=3){
+     for(var i=12+12; i<=n*3+12+12; i+=3){
        // 计算顶点x坐标
-       vertices[i] = r * Math.cos(angle)-1;
+       vertices[i] = r * Math.cos(angle);
        // 计算顶点y坐标
        vertices[i+1] = r * Math.sin(angle);
        vertices[i+2] = 0;
        angle += stepAngle;
      }
 
+     for(var k=0;k<12;k++){
+         vertices[k]=eyes[k];
+     }
+
+     for(k=12;k<12+12;k++){
+         vertices[k]=mon[k-12];
+     }
      
      return vertices;
-}
-
-function line(a, b, color) {
-    points.push( a[0], a[1], a[2] );//把所有定点的信息都放入points
-    for (var k = 0; k < 3; k++) {
-        colors.push(baseColor[color * 3 + k]);
-    }
-    points.push( b[0], b[1], b[2] );
-    for (var k = 0; k < 3; k++) {
-        colors.push(baseColor[color * 3 + k]);
-    }
-
 }

@@ -10,11 +10,13 @@
 
 	void main()
 	{
-        float u = theta;
-		gl_Position.x = vPosition.x + u ;
-		gl_Position.y = vPosition.y;
+        float u = cos( theta );
+		float v = sin( theta );
+
+		gl_Position.x = vPosition.x * u - vPosition.y * v;
+		gl_Position.y = vPosition.x * v + vPosition.y * u;
 		gl_Position.z = 0.0;
-        gl_Position.w = 1.0;
+		gl_Position.w = 1.0;
 	}
     </script>
     
@@ -23,7 +25,7 @@
 
 	void main()
 	{
-		gl_FragColor = vec4( 1.0, 0.95, 0.9, 1.0 );
+		gl_FragColor = vec4(1.0,0.8,0,1.0);//vec4( 1.0, 0.95, 0.9, 1.0 );
 	}
     </script>
 
