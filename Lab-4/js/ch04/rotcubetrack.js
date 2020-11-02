@@ -23,6 +23,12 @@ var lastPos = [ 0, 0, 0 ];
 var curx, cury;
 var startx, starty;
 
+var tans = [0, 0, 0];
+var sca = 1;
+
+var scaLoc;
+var tansLoc;
+
 function initCube(){
 	canvas = document.getElementById( "gl-canvas" );
 
@@ -60,6 +66,27 @@ function initCube(){
 	rotationMatrix = mat4.create();
 	rotationMatrixLoc = gl.getUniformLocation( program, "rmat" );
 	gl.uniformMatrix4fv( rotationMatrixLoc, false, new Float32Array(rotationMatrix) );
+
+	scaLoc = gl.getUniformLocation(program, "sca");
+
+    tansLoc =gl.getUniformLocation(program, "tans");
+    gl.uniform3fv(tansLoc, tans);
+	
+	document.getElementById("sca").onchange = function(event){
+        sca=event.target.value;
+	}
+	
+	document.getElementById("xTans").onchange = function(event){
+        tans[0] = event.target.value;  
+    }
+
+    document.getElementById("yTans").onchange = function(event){
+        tans[1] = event.target.value;  
+    }
+
+    document.getElementById("zTans").onchange = function(event){
+        tans[2] = event.target.value;  
+    }
 
 	canvas.addEventListener( "mousedown", function(event){
 		var x = 2*event.clientX/canvas.width-1;
@@ -122,7 +149,7 @@ function moveMotion( x, y ){
 		dz = curPos[2] - lastPos[2];
 
 		if( dx || dy || dz ){
-			angle = -1.0*Math.sqrt( dx*dx + dy*dy + dz*dz );
+			angle = -1.0*Math.sqrt( dx*dx + dy*dy + dz*dz )*Math.PI/180;
 
 			axis[0] = lastPos[1] * curPos[2] - lastPos[2] * curPos[1];
 			axis[1] = lastPos[2] * curPos[0] - lastPos[0] * curPos[2];
@@ -198,6 +225,8 @@ function render(){
 		mat4.multiply(rotationMatrix, rotationMatrix, rmat);
 		gl.uniformMatrix4fv( rotationMatrixLoc, false, new Float32Array(rotationMatrix) );
 	}
+	gl.uniform1f(scaLoc,sca);
+    gl.uniform3fv(tansLoc,tans);
 	gl.drawArrays( gl.TRIANGLES, 0, points.length/3 );
 	requestAnimFrame( render );
 }
