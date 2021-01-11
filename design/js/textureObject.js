@@ -147,7 +147,7 @@ window.onload = function initWindow(){
     skyboxtexcoordsLoc = gl.getAttribLocation(programskybox, "vTexCoords" );
 
     programtex = initShaders( gl, "vshader-objtex", "fshader-objtex" );
-    gl.useProgram( programtex ); // 可更改
+    gl.useProgram( programtex ); 
     
     positionLoc = gl.getAttribLocation( programtex, "vPosition" );
     normalLoc = gl.getAttribLocation( programtex, "vNormal" );
@@ -219,27 +219,16 @@ function handleMouseUp(event) {
 function handleMouseMove(event) {
     if (!mouseDown)
         return;
-
     var newX = event.clientX;
     var newY = event.clientY;
 
     var deltaX = (newX - lastMouseX);
-    //console.log("x: "+deltaX);
-    //var deltaX = (newX - lastMouseX)%180;
     var d = deltaX;
-    //dyt = parseFloat(dyt) + parseFloat(d);
-    //cx = cx + parseFloat(d);
     theta = theta - parseFloat(d)*0.2;
     
     var deltaY = (newY - lastMouseY);
-    //console.log("y:" + deltaY);
-    //var deltaY = (newY - lastMouseY)%180;
     d = deltaY;
-    //dxt = parseFloat(dxt) + parseFloat(d);
-
-    //cy = cy + parseFloat(d);
     phi = phi - parseFloat(d)*0.2;
-
     lastMouseX = newX;
     lastMouseY = newY;
     buildModelViewProj();
@@ -430,7 +419,7 @@ function buildSkyBox(){
 }
 
 function initInterface(){
-    objFileInput = document.getElementById("modelInput");
+    objFileInput = document.getElementById("modelInput");//获取选择的obj文件
     objFileInput.addEventListener("change", function(event){
         var file = objFileInput.files[0];
         var reader = new FileReader();
@@ -439,7 +428,7 @@ function initInterface(){
             meshdata = reader.result;
             initObj();
         };
-        reader.readAsText(file);
+        reader.readAsText(file);//读取文件
     });
 
     textureFileInput = document.getElementById("textureInput");
@@ -495,11 +484,7 @@ function isPowerOf2( value ){
 }
 
 function initObj(){
-    // read obj file, initialize points, vertex coordinates, colors
     mesh = new OBJ.Mesh( meshdata );
-    //OBJ.initMeshBuffers( gl, mesh );
-
-    // normalize all vertex position into [-1,1], and center at [0,0,0]
     dx = -1.0 * (parseFloat(mesh.xmax) + parseFloat(mesh.xmin))/2.0;
     dy = -1.0 * (parseFloat(mesh.ymax) + parseFloat(mesh.ymin))/2.0;
     dz = -1.0 * (parseFloat(mesh.zmax) + parseFloat(mesh.zmin))/2.0;
