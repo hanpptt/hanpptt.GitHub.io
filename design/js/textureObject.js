@@ -276,12 +276,12 @@ function configureBumpTexture( url ){
 }
 
 var faceUrl = [
-    '../textures/BlueNebular_front.jpg',
-    '../textures/BlueNebular_back.jpg',
-    '../textures/BlueNebular_bottom.jpg',
-    '../textures/BlueNebular_top.jpg',
-    '../textures/BlueNebular_right.jpg',
-    '../textures/BlueNebular_left.jpg',
+    '../design/textures/BlueNebular_front.jpg',
+    '../design/textures/BlueNebular_back.jpg',
+    '../design/textures/BlueNebular_bottom.jpg',
+    '../design/textures/BlueNebular_top.jpg',
+    '../design/textures/BlueNebular_right.jpg',
+    '../design/textures/BlueNebular_left.jpg',
 ];
 
 var cubemap_image_cnt = 0;    
