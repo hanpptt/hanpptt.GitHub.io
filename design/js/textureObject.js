@@ -151,26 +151,6 @@ window.onload = function initWindow(){
     
     positionLoc = gl.getAttribLocation( programtex, "vPosition" );
     normalLoc = gl.getAttribLocation( programtex, "vNormal" );
-
-    rotationMatrix = mat4.create();
-	rotationMatrixLoc = gl.getUniformLocation( programtex, "rmat" );
-	gl.uniformMatrix4fv( rotationMatrixLoc, false, new Float32Array(rotationMatrix) );
-
-	scaLoc = gl.getUniformLocation(programtex, "sca");
-    tansLoc =gl.getUniformLocation(programtex, "tans");
-    gl.uniform3fv(tansLoc, tans);
-	
-	document.getElementById("sca").onchange = function(event){
-        sca=event.target.value;
-	}
-	
-	document.getElementById("xTans").onchange = function(event){
-        tans[0] = event.target.value;  
-    }
-
-    document.getElementById("yTans").onchange = function(event){
-        tans[1] = event.target.value;  
-    }
     fovy = fovyLoc * Math.PI / 180.0;
     initInterface();
 
@@ -276,12 +256,12 @@ function configureBumpTexture( url ){
 }
 
 var faceUrl = [
-    '../design/textures/BlueNebular_front.jpg',
-    '../design/textures/BlueNebular_back.jpg',
-    '../design/textures/BlueNebular_bottom.jpg',
-    '../design/textures/BlueNebular_top.jpg',
-    '../design/textures/BlueNebular_right.jpg',
-    '../design/textures/BlueNebular_left.jpg',
+    '../../textures/BlueNebular_front.jpg',
+    '../../textures/BlueNebular_back.jpg',
+    '../../textures/BlueNebular_bottom.jpg',
+    '../../textures/BlueNebular_top.jpg',
+    '../../textures/BlueNebular_right.jpg',
+    '../../textures/BlueNebular_left.jpg',
 ];
 
 var cubemap_image_cnt = 0;    
@@ -458,6 +438,7 @@ function initInterface(){
         );
     });
 
+
     document.getElementById("textureAlpha").addEventListener("input", function(event){
         textureAlpha = parseFloat(event.target.value);
     });
@@ -472,6 +453,32 @@ function initInterface(){
 
     document.getElementById("shadowdepth").addEventListener("input", function(event){
         shadowDepth = parseFloat(event.target.value);
+    });
+    document.getElementById("sca").addEventListener("input", function(event){
+        sx = this.value;
+        sy = this.value;
+        sz = this.value;
+        buildModelViewProj();
+    });
+    document.getElementById("xTans").addEventListener("input", function(event){
+        dx = this.value;
+        buildModelViewProj();
+    });
+    document.getElementById("yTans").addEventListener("input", function(event){
+        dy = this.value;
+        buildModelViewProj();
+    });
+    document.getElementById("zTans").addEventListener("input", function(event){
+        dz = this.value;
+        buildModelViewProj();
+    });
+    document.getElementById("xRot").addEventListener("input", function(event){
+        dxt = this.value;
+        buildModelViewProj();
+    });
+    document.getElementById("zRot").addEventListener("input", function(event){
+        dzt = this.value;
+        buildModelViewProj();
     });
 
     canvas.onmousedown = handleMouseDown;
@@ -517,10 +524,9 @@ function buildModelViewProj(){
     //mat4.rotateY(skyboxModelViewMatrix, skyboxModelViewMatrix, dyt * Math.PI / 180.0);
     mat4.translate( modelViewMatrix, modelViewMatrix, vec3.fromValues( dx, dy, dz ) );
     mat4.scale(modelViewMatrix, modelViewMatrix, vec3.fromValues(sx, sy, sz));  
-    //mat4.rotateZ(modelViewMatrix, modelViewMatrix, dzt * Math.PI / 180.0);
-    //mat4.rotateY(modelViewMatrix, modelViewMatrix, dyt * Math.PI / 180.0);
-    
-    //mat4.rotateX(modelViewMatrix, modelViewMatrix, dxt * Math.PI / 180.0);
+    mat4.rotateZ(modelViewMatrix, modelViewMatrix, dzt * Math.PI / 180.0);
+    mat4.rotateY(modelViewMatrix, modelViewMatrix, dyt * Math.PI / 180.0);
+    mat4.rotateX(modelViewMatrix, modelViewMatrix, dxt * Math.PI / 180.0);
     
     //mat4.ortho( projectionMatrix, left, right, ybottom, ytop, near, far );
     aspect = 1;
@@ -530,30 +536,8 @@ function buildModelViewProj(){
     
     mat3.normalFromMat4(invModelViewMatrix, modelViewMatrix);
     mat3.transpose(invModelViewMatrix, invModelViewMatrix);
-
-    //console.log(prod);
-
-    //invModelViewMatrixLoc = gl.getUniformLocation(programtex, "invModelViewMatrix");
-    //gl.uniformMatrix3fv(invModelViewMatrixLoc, false, new Float32Array(invModelViewMatrix));
 }
 
-//var interval = setInterval(timerFunc, 30);
-/*
-function timerFunc() {
-    dyt += 0.5;
-    dxt += 0.5;
-    if( dyt > 360 )
-        dyt -= 360;
-    if( dxt > 360 )
-        dxt -= 360;
-    
-    //dy += diry * 0.1;
-    
-    //if( dy > 3.0 || dy < -3.0 )
-     //   diry *= -1;
-
-    render();
-}*/
 
 function buildLight(){
 }
