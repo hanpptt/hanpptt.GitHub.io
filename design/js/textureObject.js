@@ -166,12 +166,20 @@ window.onload = function initWindow(){
         configureBumpTexture(url);
     }
 
+    if( modelFile === null ){
+        var url = "../../头骨和椎骨图.obj";
+        requestCORSIfNotSameOrigin(modelFile, url);
+        modelFile = url;
+        readerInit(modelFile);
+    }
+
     buildSkyBox();
 
     initObjBuffers();
 
     render();
 }
+
 
 function initObjBuffers(){
     meshNormalBuffer = gl.createBuffer();
@@ -253,6 +261,26 @@ function configureBumpTexture( url ){
     };
     requestCORSIfNotSameOrigin(bumpTexImage, url);
     bumpTexImage.src = url;
+}
+
+function initObj(){
+    mesh = new OBJ.Mesh( meshdata );
+    dx = -1.0 * (parseFloat(mesh.xmax) + parseFloat(mesh.xmin))/2.0;
+    dy = -1.0 * (parseFloat(mesh.ymax) + parseFloat(mesh.ymin))/2.0;
+    dz = -1.0 * (parseFloat(mesh.zmax) + parseFloat(mesh.zmin))/2.0;
+
+    var maxScale;
+    var scalex = Math.abs(parseFloat(mesh.xmax)-parseFloat(mesh.xmin));
+    var scaley = Math.abs(parseFloat(mesh.ymax)-parseFloat(mesh.ymin));
+    var scalez = Math.abs(parseFloat(mesh.zmax)-parseFloat(mesh.zmin));
+
+    maxScale = Math.max(scalex, scaley, scalez);
+
+    sx =  2.0/maxScale;
+    sy =  2.0/maxScale;
+    sz =  2.0/maxScale;
+    meshinited = true;
+    render();
 }
 
 var faceUrl = [
@@ -398,17 +426,30 @@ function buildSkyBox(){
     
 }
 
+function readerInit(file){
+    var reader = new FileReader();
+    reader.readAsText(file);
+    reader.onload = function(event){
+        meshdata = reader.result;
+        initObj();
+    };
+}
+
 function initInterface(){
     objFileInput = document.getElementById("modelInput");//获取选择的obj文件
     objFileInput.addEventListener("change", function(event){
         var file = objFileInput.files[0];
-        var reader = new FileReader();
+        //var prehead = "http://localhost:8080/";
+        //var reader = new FileReader();
+        //file='../../头骨和椎骨图.obj';
+        //var fileurl = prehead.concat(file.name);
 
-        reader.onload = function(event){
-            meshdata = reader.result;
-            initObj();
-        };
-        reader.readAsText(file);//读取文件
+        // reader.onload = function(event){
+        //     meshdata = reader.result;
+        //     initObj();
+        // };
+        // reader.readAsText(file);//读取文件
+        readerInit(file);
     });
 
     textureFileInput = document.getElementById("textureInput");
@@ -490,26 +531,6 @@ function isPowerOf2( value ){
     return (value & (value - 1)) == 0;
 }
 
-function initObj(){
-    mesh = new OBJ.Mesh( meshdata );
-    dx = -1.0 * (parseFloat(mesh.xmax) + parseFloat(mesh.xmin))/2.0;
-    dy = -1.0 * (parseFloat(mesh.ymax) + parseFloat(mesh.ymin))/2.0;
-    dz = -1.0 * (parseFloat(mesh.zmax) + parseFloat(mesh.zmin))/2.0;
-
-    var maxScale;
-    var scalex = Math.abs(parseFloat(mesh.xmax)-parseFloat(mesh.xmin));
-    var scaley = Math.abs(parseFloat(mesh.ymax)-parseFloat(mesh.ymin));
-    var scalez = Math.abs(parseFloat(mesh.zmax)-parseFloat(mesh.zmin));
-
-    maxScale = Math.max(scalex, scaley, scalez);
-
-    sx =  2.0/maxScale;
-    sy =  2.0/maxScale;
-    sz =  2.0/maxScale;
-    meshinited = true;
-    render();
-}
-
 function buildModelViewProj(){
     var rthe = theta * Math.PI / 180.0;
     var rphi = phi * Math.PI / 180.0;
@@ -525,7 +546,7 @@ function buildModelViewProj(){
     mat4.translate( modelViewMatrix, modelViewMatrix, vec3.fromValues( dx, dy, dz ) );
     mat4.scale(modelViewMatrix, modelViewMatrix, vec3.fromValues(sx, sy, sz));  
     mat4.rotateZ(modelViewMatrix, modelViewMatrix, dzt * Math.PI / 180.0);
-    mat4.rotateY(modelViewMatrix, modelViewMatrix, dyt * Math.PI / 180.0);
+    mat4.rotateY(modelViewMatrix, modelViewMatrix, 0 * Math.PI / 180.0);
     mat4.rotateX(modelViewMatrix, modelViewMatrix, dxt * Math.PI / 180.0);
     
     //mat4.ortho( projectionMatrix, left, right, ybottom, ytop, near, far );
