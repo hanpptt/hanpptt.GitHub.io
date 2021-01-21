@@ -54,3 +54,16 @@
 + [LAB-4](http://hanpptt.github.io/Lab-4/demos/index.html)
 
 
+### 实验五
+
++[LAB-5](http://hanpptt.github.io/Lab-5/demos/index.html)
+
+### 实验六
+
++[LAB-6](http://hanpptt.github.io/Lab-6/index.html)
+
+### 实验七
+
++[LAB-7](http://hanpptt.github.io/Lab-7/index.html)
+
+
